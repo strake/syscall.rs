@@ -5,6 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v0.2.1] - 2017-05-06
+
+### Added
+
+- Some ARM specific syscals.
+
 ## [v0.2.0] - 2017-02-27
 
 ### Added
@@ -71,7 +77,8 @@ Initial release. Forked from [syscall] v0.2.1.
 
 - Support for x86_64 FreeBSD
 
-[Unreleased]: https://github.com/japaric/syscall.rs/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/japaric/syscall.rs/compare/v0.2.1...HEAD
+[v0.2.1]: https://github.com/japaric/syscall.rs/compare/v0.2.0...v0.2.1
 [v0.2.0]: https://github.com/japaric/syscall.rs/compare/v0.1.5...v0.2.0
 [v0.1.5]: https://github.com/japaric/syscall.rs/compare/v0.1.4...v0.1.5
 [v0.1.4]: https://github.com/japaric/syscall.rs/compare/v0.1.3...v0.1.4
