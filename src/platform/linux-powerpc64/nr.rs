@@ -305,6 +305,7 @@ pub const SSETMASK: usize = 69;
 pub const STAT: usize = 106;
 pub const STATFS: usize = 99;
 pub const STATFS64: usize = 252;
+pub const STATX: usize = 383;
 pub const STIME: usize = 25;
 pub const STTY: usize = 31;
 pub const SUBPAGE_PROT: usize = 310;

@@ -306,6 +306,7 @@ pub const STAT: usize = 4106;
 pub const STAT64: usize = 4213;
 pub const STATFS: usize = 4099;
 pub const STATFS64: usize = 4255;
+pub const STATX: usize = 4366;
 pub const STIME: usize = 4025;
 pub const STTY: usize = 4031;
 pub const SWAPOFF: usize = 4115;
