@@ -44,6 +44,8 @@ def load_headers(names: Iterable[Tuple[str, str]], arch: str, extra: str = ''):
             f.write('\n')
             f.write('#include <asm/unistd.h>\n')
             for prefix, name in names:
+                if prefix is None:
+                    prefix = ''
                 f.write('gen_nr {prefix}{name} __{prefix}NR_{name}\n'.format(prefix=prefix, name=name))
             f.flush()
             lines = subprocess.check_output(['gcc', '-nostdinc',
