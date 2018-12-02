@@ -8,7 +8,7 @@
 // except according to those terms.
 
 #[macro_use]
-extern crate sc;
+extern crate syscall;
 
 fn write(fd: usize, buf: &[u8]) {
     unsafe {

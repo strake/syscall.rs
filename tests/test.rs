@@ -8,7 +8,7 @@
 // except according to those terms.
 
 #[macro_use]
-extern crate sc;
+extern crate syscall;
 
 #[cfg(target_os = "linux")]
 #[test]
@@ -26,7 +26,7 @@ fn ebadf() {
 #[test]
 fn getpid() {
     unsafe {
-        assert!(0 < sc::syscall0(sc::nr::GETPID));
+        assert!(0 < syscall::syscall0(syscall::nr::GETPID));
     }
 }
 
