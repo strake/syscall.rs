@@ -32,17 +32,17 @@ def eval_expr(expr: str) -> int:
 def load_headers(names: Iterable[Tuple[str, str]], arch: str, extra: str = ''):
     with tempfile.NamedTemporaryFile(mode='w+', suffix='.h') as f:
         with tempfile.TemporaryDirectory() as temp_include_dir:
-            os.mkdir('{}/asm'.format(temp_include_dir))
-            # Create empty asm/unistd-eabi.h and asm/unistd-common.h because
-            # the ARM asm/unistd.h header needs them.
-            with open('{}/asm/unistd-eabi.h'.format(temp_include_dir), 'w'):
+            os.mkdir('{}/llvm_asm'.format(temp_include_dir))
+            # Create empty llvm_asm/unistd-eabi.h and llvm_asm/unistd-common.h because
+            # the ARM llvm_asm/unistd.h header needs them.
+            with open('{}/llvm_asm/unistd-eabi.h'.format(temp_include_dir), 'w'):
                 pass
-            with open('{}/asm/unistd-common.h'.format(temp_include_dir), 'w'):
+            with open('{}/llvm_asm/unistd-common.h'.format(temp_include_dir), 'w'):
                 pass
 
             f.write(extra)
             f.write('\n')
-            f.write('#include <asm/unistd.h>\n')
+            f.write('#include <llvm_asm/unistd.h>\n')
             for prefix, name in names:
                 if prefix is None:
                     prefix = ''

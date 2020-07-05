@@ -20,7 +20,7 @@ pub mod nr;
 #[inline(always)]
 pub unsafe fn syscall0(mut nr: usize) -> usize {
     let success: usize;
-    asm!("syscall"
+    llvm_asm!("syscall"
          : "+{$2}"(nr) "={$7}"(success)
          :
          : "$8" "$9" "$10" "$11" "$12" "$13" "$14" "$15" "$24" "$25" "memory"
@@ -35,7 +35,7 @@ pub unsafe fn syscall0(mut nr: usize) -> usize {
 #[inline(always)]
 pub unsafe fn syscall1(mut nr: usize, a1: usize) -> usize {
     let success: usize;
-    asm!("syscall"
+    llvm_asm!("syscall"
          : "+{$2}"(nr) "={$7}"(success)
          : "{$4}"(a1)
          : "$8" "$9" "$10" "$11" "$12" "$13" "$14" "$15" "$24" "$25" "memory"
@@ -50,7 +50,7 @@ pub unsafe fn syscall1(mut nr: usize, a1: usize) -> usize {
 #[inline(always)]
 pub unsafe fn syscall2(mut nr: usize, a1: usize, a2: usize) -> usize {
     let success: usize;
-    asm!("syscall"
+    llvm_asm!("syscall"
          : "+{$2}"(nr) "={$7}"(success)
          : "{$4}"(a1) "{$5}"(a2)
          : "$8" "$9" "$10" "$11" "$12" "$13" "$14" "$15" "$24" "$25" "memory"
@@ -69,7 +69,7 @@ pub unsafe fn syscall3(mut nr: usize,
                        a3: usize)
                        -> usize {
     let success: usize;
-    asm!("syscall"
+    llvm_asm!("syscall"
          : "+{$2}"(nr) "={$7}"(success)
          : "{$4}"(a1) "{$5}"(a2) "{$6}"(a3)
          : "$8" "$9" "$10" "$11" "$12" "$13" "$14" "$15" "$24" "$25" "memory"
@@ -88,7 +88,7 @@ pub unsafe fn syscall4(mut nr: usize,
                        a3: usize,
                        mut a4: usize)
                        -> usize {
-    asm!("syscall"
+    llvm_asm!("syscall"
          : "+{$2}"(nr) "+{$7}"(a4)
          : "{$4}"(a1) "{$5}"(a2) "{$6}"(a3)
          : "$8" "$9" "$10" "$11" "$12" "$13" "$14" "$15" "$24" "$25" "memory"
@@ -104,7 +104,7 @@ pub unsafe fn syscall5(mut nr: usize,
                        mut a4: usize,
                        a5: usize)
                        -> usize {
-    asm!(".set noat
+    llvm_asm!(".set noat
           subu $$29,20
           sw $5, 16($$29)
           syscall
@@ -126,7 +126,7 @@ pub unsafe fn syscall6(mut nr: usize,
                        a5: usize,
                        a6: usize)
                        -> usize {
-    asm!(".set noat
+    llvm_asm!(".set noat
           subu $$29,24
           sw $5, 16($$29)
           sw $6, 20($$29)
