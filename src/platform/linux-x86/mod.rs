@@ -13,7 +13,7 @@ pub mod nr;
 
 #[inline(always)]
 pub unsafe fn syscall0(mut n: usize) -> usize {
-    asm!("int $$0x80"
+    llvm_asm!("int $$0x80"
          : "+{eax}"(n)
          :
          : "memory" "cc"
@@ -23,7 +23,7 @@ pub unsafe fn syscall0(mut n: usize) -> usize {
 
 #[inline(always)]
 pub unsafe fn syscall1(mut n: usize, a1: usize) -> usize {
-    asm!("int $$0x80"
+    llvm_asm!("int $$0x80"
          : "+{eax}"(n)
          : "{ebx}"(a1)
          : "memory" "cc"
@@ -33,7 +33,7 @@ pub unsafe fn syscall1(mut n: usize, a1: usize) -> usize {
 
 #[inline(always)]
 pub unsafe fn syscall2(mut n: usize, a1: usize, a2: usize) -> usize {
-    asm!("int $$0x80"
+    llvm_asm!("int $$0x80"
          : "+{eax}"(n)
          : "{ebx}"(a1) "{ecx}"(a2)
          : "memory" "cc"
@@ -43,7 +43,7 @@ pub unsafe fn syscall2(mut n: usize, a1: usize, a2: usize) -> usize {
 
 #[inline(always)]
 pub unsafe fn syscall3(mut n: usize, a1: usize, a2: usize, a3: usize) -> usize {
-    asm!("int $$0x80"
+    llvm_asm!("int $$0x80"
          : "+{eax}"(n)
          : "{ebx}"(a1) "{ecx}"(a2) "{edx}"(a3)
          : "memory" "cc"
@@ -58,7 +58,7 @@ pub unsafe fn syscall4(mut n: usize,
                        a3: usize,
                        a4: usize)
                        -> usize {
-    asm!("int $$0x80"
+    llvm_asm!("int $$0x80"
          : "+{eax}"(n)
          : "{ebx}"(a1) "{ecx}"(a2) "{edx}"(a3) "{esi}"(a4)
          : "memory" "cc"
@@ -74,7 +74,7 @@ pub unsafe fn syscall5(mut n: usize,
                        a4: usize,
                        a5: usize)
                        -> usize {
-    asm!("int $$0x80"
+    llvm_asm!("int $$0x80"
          : "+{eax}"(n)
          : "{ebx}"(a1) "{ecx}"(a2) "{edx}"(a3) "{esi}"(a4) "{edi}"(a5)
          : "memory" "cc"
@@ -95,7 +95,7 @@ pub unsafe fn syscall6(n: usize,
 
     // XXX: this fails when building without optimizations:
     //
-    //    asm!("int $$0x80" : "={eax}"(ret)
+    //    llvm_asm!("int $$0x80" : "={eax}"(ret)
     //                      : "{eax}"(n), "{ebx}"(a1), "{ecx}"(a2), "{edx}"(a3),
     //                        "{esi}"(a4), "{edi}"(a5), "{ebp}"(a6)
     //                      : "memory" "cc"
@@ -106,7 +106,7 @@ pub unsafe fn syscall6(n: usize,
     // XXX: this fails when building with optimizations as the "m"(a6) gets
     // translated to [esp+offset] but the push ebp moved esp.
     //
-    //      asm!("push %ebp
+    //      llvm_asm!("push %ebp
     //            mov $7, %ebp
     //            int $$0x80
     //            pop %ebp"
@@ -123,7 +123,7 @@ pub unsafe fn syscall6(n: usize,
     // and manually save restore ebp.
     let args = [n, a1, a2, a3, a4, a5, a6];
 
-    asm!("push %ebp
+    llvm_asm!("push %ebp
           movl 24(%eax), %ebp
           movl 20(%eax), %edi
           movl 16(%eax), %esi

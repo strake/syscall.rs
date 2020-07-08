@@ -12,7 +12,7 @@
 // Reference http://man7.org/linux/man-pages/man2/syscall.2.html
 
 #![deny(warnings)]
-#![feature(asm)]
+#![feature(llvm_asm)]
 #![no_std]
 
 #[cfg(test)]
